@@ -1,27 +1,59 @@
 <template>
-    <div>
-        <!-- 公共头部 -->
-        <app-header></app-header>
-        <!-- 公共左侧 -->
-        <app-aside></app-aside>
-        <!-- 变化的后台管理子页面 -->
-        <router-view></router-view>
+    <div class="admin">
+        <el-container>
+
+        <!-- 左侧 -->
+        <el-aside width='200px'>
+            <!-- 左侧导航, 公共部分 -->
+            <app-aside></app-aside>
+        </el-aside>
+
+        <!-- 右侧 -->
+        <el-container>
+            <!-- 右侧头部, 公共部分 -->
+            <el-header>
+                <app-header></app-header>
+            </el-header>
+
+            <!-- 右侧主体, 变化部分, 将来要通过子路由控制 -->
+            
+                <app-main></app-main>
+            
+        </el-container>
+
+    </el-container>
+
     </div>
 </template>
 
 <script>
-    import Header from "./subcom/Header.vue";
-    import Aside from "./subcom/Aside.vue";
+import Header from "./subcom/Header.vue";
+import Aside from "./subcom/Aside.vue";
+import Main from "./subcom/Main.vue";
 
-    export default {
-            // 注册子组件
-            components: {
-                appHeader:Header,
-                appAside:Aside
-            }
-    }
+export default {
+  // 注册子组件
+  components: {
+    appHeader: Header,
+    appAside: Aside,
+    appMain:Main
+  }
+};
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+.admin {
+  height: 100%;
+  color: #333;
+  .el-header {
+    line-height: 60px;
+  }
+  .el-container {
+    height: 100%;
+  }
+  &_conter {
+    height: 100%;
+    // background: red
+  }
+}
 </style>

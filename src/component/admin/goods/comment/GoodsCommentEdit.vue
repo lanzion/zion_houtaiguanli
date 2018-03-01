@@ -1,6 +1,6 @@
 <template>
     <div>
-         购物车 
+        商品评论编辑
     </div>
 </template>
 

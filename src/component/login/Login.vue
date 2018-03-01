@@ -6,7 +6,7 @@
                 <!-- label用来设置表单提示文字, prop用来指定当前表单代表的字段名(可省略, 但是如果需要表单校验与重置功能, 必须写) -->
                 <el-form-item label="用户名" prop="uname">
                     <!-- v-model双向数据绑定, 需要绑定data里的数据, 将来要把这些数据提交给后端 -->
-                    <el-input type="text" v-model="ruleForm2.uname" auto-complete="off"></el-input>
+                    <el-input type="text" v-model="ruleForm2.uname" auto-complete="off" ></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="upwd">
                     <el-input type="password" v-model="ruleForm2.upwd" auto-complete="off"></el-input>
@@ -35,8 +35,8 @@ export default {
     // };
     return {
       ruleForm2: {
-        uname: "",
-        upwd: ""
+        uname: "admin",
+        upwd: "123456"
       },
       rules2: {
         uname: [
@@ -49,8 +49,18 @@ export default {
   methods: {
     login() {
         // post请求的第二个参数是发送的数据, 这里直接把data里的表单对象传过去
-        this.$http.post(this.$api.login,this.ruleForm2).then(()=>{
-            this.$alert('登录成功')
+        this.$http.post(this.$api.login,this.ruleForm2).then((res)=>{
+            if(res.data.status==0){
+                this.$alert('登录成功','提示',{
+                    callback:()=>{
+                        localStorage.setItem('uname',res.data.message.uname)
+                        // 登录成功，页面跳转
+                        this.$router.push({name:'admin'})
+                    }
+                })
+            }else{
+                this.$alert(res.data.message)
+            }
         })
         // console.log(this.ruleForm2);
     },
@@ -59,7 +69,7 @@ export default {
         if (valid) {
           this.login();
         } else {
-          this.$alert('账号或密码不合格!')
+          this.$alert('账号或密码不合格!','提示')
         }
       });
     },
@@ -77,7 +87,7 @@ export default {
   section {
     padding: 60px;
     width: 400px;
-    height: 300px;
+    height: 200px;
     margin: 0 auto;
     position: relative;
     top: 50%;
