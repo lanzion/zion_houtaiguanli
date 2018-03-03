@@ -1,29 +1,30 @@
 <template>
-    <div class="admin">
-        <el-container>
+  <div class="admin">
+    <el-container>
 
-        <!-- 左侧 -->
-        <el-aside width='200px'>
-            <!-- 左侧导航, 公共部分 -->
-            <app-aside></app-aside>
-        </el-aside>
+      <!-- 左侧 -->
+      <el-aside width=''>
+        <!-- 左侧导航, 公共部分 -->
+        <app-aside></app-aside>
+      </el-aside>
 
-        <!-- 右侧 -->
-        <el-container>
-            <!-- 右侧头部, 公共部分 -->
-            <el-header>
-                <app-header></app-header>
-            </el-header>
+      <!-- 右侧 -->
+      <el-container>
+        <!-- 右侧头部, 公共部分 -->
+        <el-header>
+          <app-header></app-header>
+        </el-header>
 
-            <!-- 右侧主体, 变化部分, 将来要通过子路由控制 -->
-            
-                <app-main></app-main>
-            
-        </el-container>
+        <!-- 右侧主体, 变化部分, 将来要通过子路由控制 -->
+        <el-main>
+          <app-main></app-main>
+        </el-main>
+
+      </el-container>
 
     </el-container>
 
-    </div>
+  </div>
 </template>
 
 <script>
@@ -36,7 +37,7 @@ export default {
   components: {
     appHeader: Header,
     appAside: Aside,
-    appMain:Main
+    appMain: Main
   }
 };
 </script>
@@ -47,13 +48,13 @@ export default {
   color: #333;
   .el-header {
     line-height: 60px;
+    background: #eee;
   }
   .el-container {
     height: 100%;
   }
-  &_conter {
-    height: 100%;
-    // background: red
+  .main{
+    position: relative;
   }
 }
 </style>

@@ -1,22 +1,28 @@
 <template>
   <div class="aside">
     <div class="toggle">
-      <el-button icon="el-icon-menu" @click="toggle"></el-button>
+      <el-button @click="toggle">
+        <i :class="isIcon"></i>
+      </el-button>
 
     </div>
 
-    <el-menu default-active="5-1" class="el-menu-vertical-demo " background-color='#267cb7' unique-opened @open="handleOpen" @close="handleClose" :collapse="isCollapse" text-color="#fff">
+    <el-menu  class="el-menu-vertical-demo " background-color='#267cb7' unique-opened  :collapse="isCollapse" text-color="#fff">
+
       <el-submenu v-for="item in menu" :key="item.title" :index="item.title">
+
         <template slot="title">
           <i class="el-icon-message"></i>
           <span slot="title">{{ item.title }}</span>
         </template>
+
         <el-menu-item-group class="menu_list" v-for="subItem in item.submenu" :key="subItem.text" :index="subItem.text">
           <router-link :to="subItem.path">
             <i class="el-icon-document"></i>
             <span>{{ subItem.text }}</span>
           </router-link>
         </el-menu-item-group>
+
       </el-submenu>
 
     </el-menu>
@@ -27,6 +33,7 @@
 export default {
   data() {
     return {
+      isIcon: "el-icon-d-arrow-left",
       isCollapse: false,
       menu: [
         {
@@ -79,36 +86,34 @@ export default {
   methods: {
     toggle() {
       this.isCollapse = !this.isCollapse;
+      if (this.isCollapse) {
+        this.isIcon = "el-icon-d-arrow-right";
+      } else {
+        this.isIcon = "el-icon-d-arrow-left";
+      }
     },
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    }
+   
   }
 };
 </script>
 
 <style scoped lang="less">
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  //   width: 200px;
+  width: 200px;
   min-height: 400px;
 }
 .aside {
   overflow: hidden;
-  //   position: relative;
   height: 100%;
+  min-height: 500px;
   i {
-    color: #fff;
+    color: #fff !important;
   }
+
   .el-menu-vertical-demo {
     height: 100%;
   }
-}
-.el-submenu {
-  min-width: 0;
-  overflow: hidden;
+
 }
 .menu_list {
   text-align: center;
@@ -118,11 +123,11 @@ export default {
   }
 }
 .toggle {
-  // z-index: 100;
-  // width: 200px;
-  background: #eee;
+  height: 60px;
+  background: #267cb7;
+  text-align: right;
   .el-button {
-    background: #eee;
+    background: #267cb7;
     font-size: 26px;
     border: none;
   }
