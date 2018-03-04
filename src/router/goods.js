@@ -17,7 +17,7 @@ module.exports = [
     // 商品分类管理
     { name: "gcgl", path: "goods/category/list", component: goodsCategoryList },
     { name: "gcga", path: "goods/category/add", component: goodsCategoryAdd },
-    { name: "gcge", path: "goods/category/edit", component: goodsCategoryEdit },
+    { name: "gcge", path: "goods/category/edit/:id", component: goodsCategoryEdit },
 
     // 商品评论管理
     { name: "gcml", path: "goods/comment/list", component: GoodsCommentList },

@@ -7,7 +7,7 @@
 
     </div>
 
-    <el-menu  class="el-menu-vertical-demo " background-color='#267cb7' unique-opened  :collapse="isCollapse" text-color="#fff">
+    <el-menu open="商品管理-内容管理" class="el-menu-vertical-demo " background-color='#267cb7' unique-opened  :collapse="isCollapse" text-color="#fff">
 
       <el-submenu v-for="item in menu" :key="item.title" :index="item.title">
 
