@@ -50,7 +50,7 @@ router.beforeEach((to, from, next) => {
                 next()
             } else {
                 // 没有登录过
-                next({name:'login'})
+                next({name:'login',query:{next:to.fullPath}})
             }
         }
     })

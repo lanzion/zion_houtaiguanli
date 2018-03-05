@@ -55,7 +55,7 @@ export default {
                     callback:()=>{
                         localStorage.setItem('uname',res.data.message.uname)
                         // 登录成功，页面跳转
-                        this.$router.push({name:'admin'})
+                        this.$router.push({path:this.$route.query.next || "/admin"})
                     }
                 })
             }else{
