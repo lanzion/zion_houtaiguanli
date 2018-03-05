@@ -16,11 +16,46 @@ Vue.use(VueRouter)
 //     { name: 'goodsRouterConfig', path: 'goodsRouterConfig', component: goodsRouterConfig} //子页面路径不需要加了路径
 // ]
 
-export default new VueRouter({
+let router = new VueRouter({
     routes:[
+        { path: '/', redirect: '/login'},
+        { path: '/admin', redirect: '/admin/goods/content/list'},
         // 登录
         { name: 'login', path: '/login', component:Login},
         // 后台
         { name: 'admin', path: '/admin', component: Admin, children: [...goodsRouterConfig] }
     ]
 })
+router.beforeEach((to, from, next) => {
+    Vue.prototype.$http.get(Vue.prototype.$api.islogin).then(res=>{
+        let islogin = false;
+        if (res.data.code == 'logined'){
+            islogin = true;
+        }
+
+        // 访问登录页面
+        if(to.name == 'login'){
+            if (islogin){
+                // 登录过
+                next({path:'/admin'})
+            }else{
+                // 没有登录过
+                next()
+            }
+        }
+        // 访问非登录页面
+        if (to.name != 'login') {
+            if (islogin) {
+                // 登录过
+                next()
+            } else {
+                // 没有登录过
+                next({name:'login'})
+            }
+        }
+    })
+    
+})
+
+
+export default router;
